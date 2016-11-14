@@ -30,13 +30,13 @@ module.exports = {
 
     dev: {
       adapter: require('waterline-sqlite3'),
-      migrate: 'alter'
+      migrate: 'safe'
     }
 
   },
 
   models: {
     defaultStore: 'dev',
-    migrate: 'alter'
+    migrate: 'safe'
   }
 }
