@@ -10,13 +10,21 @@
 
   // Get data from API
   app.fetchData = function(){
-    $.getJSON('http://localhost:3000/api/v1/user', function(data) {
-      console.log(`Data received: ${data}`);
-      var jsonData = JSON.parse('{ "name":"Jorge", "email":"jorge.cuevas.92@gmail.com"}');
-      console.log(jsonData.name);
-      console.log(`${data[0].email} ${data[0].name}`);
-      app.addCards(data);
-    });
+    var url = "/api/v1/user";
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+      if (request.readyState === XMLHttpRequest.DONE) {
+        if (request.status === 200) {
+          var response = JSON.parse(request.response);
+          console.log(response);
+          app.addCards(response);
+        }
+      }
+    };
+    request.open('GET', url);
+    request.send();
+
+
   }
 
   // Process data
